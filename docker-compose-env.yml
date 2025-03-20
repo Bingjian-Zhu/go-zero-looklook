@@ -57,11 +57,11 @@ services:
       TZ: Asia/Shanghai
     restart: always
     volumes:
-        - ./data/grafana/data:/var/lib/grafana
+      - ./data/grafana/data:/var/lib/grafana
     ports:
-        - "3001:3000"
+      - "3001:3000"
     networks:
-        - looklook_net
+      - looklook_net
 
   elasticsearch:
     container_name: elasticsearch
@@ -165,7 +165,7 @@ services:
 
   #asynqmon asynq延迟队列、定时队列的webui - Asynqmon asynq delay queue, timing queue's webUI
   asynqmon:
-    image: hibiken/asynqmon:latest
+    image: platacard/asynqmon:latest
     container_name: asynqmon
     ports:
       - 8980:8080
@@ -179,7 +179,7 @@ services:
       - redis
 
   mysql:
-    image: mysql/mysql-server:8.0.28
+    image: mysql/mysql-server:8.0.30
     container_name: mysql
     environment:
       # 时区上海 - Time zone Shanghai (Change if needed)
@@ -193,7 +193,7 @@ services:
       - ./data/mysql/data:/var/lib/mysql
       # 日志
     command:
-      # 将mysql8.0默认密码策略 修改为 原先 策略 (mysql8.0对其默认策略做了更改 会导致密码无法匹配) 
+      # 将mysql8.0默认密码策略 修改为 原先 策略 (mysql8.0对其默认策略做了更改 会导致密码无法匹配)
       # Modify the Mysql 8.0 default password strategy to the original strategy (MySQL8.0 to change its default strategy will cause the password to be unable to match)
       --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
